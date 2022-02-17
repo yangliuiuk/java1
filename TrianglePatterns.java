@@ -1,5 +1,5 @@
 /*
-Write a program to let the user to enter the height of a triangle, 
+Write a program to let the user enter the height of a triangle, 
 then display four triangle patterns below. 
 
 Enter triangle height: 5
