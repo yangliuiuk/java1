@@ -1,6 +1,12 @@
+/* Longest common prefix
+Write a program that prompts the user to enter two strings and displays the longest
+common prefix of the two strings.
+For example, the longest common prefix of "abc" and "abcde" is "abc".
+*/
+
 import java.util.Scanner;
 
-public class CommonPrefix {
+public class LongestCommonPrefix {
   public static void main(String[] args) {
     Scanner input = new Scanner(System.in);
 
