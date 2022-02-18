@@ -1,7 +1,7 @@
 /*
-Write a program to let the user enter a string, and then display
-its reversed string. For example, the reversed string of "abc" is
-"cba".
+Reverse a string
+Write a program that prompts the user to enter a string and displays the string in reverse order.
+For example, the reversed string of "abc" is "cba".
 */
 
 import java.util.Scanner;
