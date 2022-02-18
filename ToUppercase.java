@@ -1,3 +1,7 @@
+/*Write a program to let the user enter a string, then convert
+the entire string to uppercase.
+*/
+
 import java.util.Scanner;
 public class ToUpperCase{
     public static void main(String[] args){
