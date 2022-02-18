@@ -1,6 +1,6 @@
 /*
 Write a program that prompts the user to enter a string, and then
-convert the string to upper case and display it. 
+display the string in uppercase. 
 For example, if a user enters "abC", then the program should display "ABC". 
 You cannot simply use the toUpperCase() method in Java. 
 */
