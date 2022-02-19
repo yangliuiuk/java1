@@ -24,5 +24,11 @@ public class GreatestCommonDivisor {
             k ++;
         }
         System.out.println("The greatest common divisor for " + n1 + " and " + n2 + " is " + gcd);
+        
+        // Another approach
+        for (int i = n1 < n2 ? n1: n2; i > 0; i --){
+            if (n1 % i == 0 && n2 % i == 0) {
+                System.out.println("The greatest common divisor for " + n1 + " and " + n2 + " is " + i);
+                break;
     }
 }
