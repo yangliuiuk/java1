@@ -1,6 +1,6 @@
 /*
 Lintcode 23
-Write a method that checks whether a given character (char) is alphanumeric.
+Write a method to check whether a given character (char) is alphanumeric.
 If the character is either a number or a letter, the method should return true. Otherwise, return false.
 Test this method by reading a user input and then displaying its return value.
 */
