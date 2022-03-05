@@ -19,6 +19,6 @@ public class ToUpperCase{
             else 
                 s1 += s.charAt(i);
         }
-        System.out.print("New string is: " + s1);
+        System.out.print("The new string is: " + s1);
     }
 }
