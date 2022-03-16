@@ -66,4 +66,25 @@ int[] numbers2 = new int[numbers.length];
 for (int i = 0; i < numbers.length; i++){
     numbers2[i] = numbers[i];
 }
-    
+
+// Sequential search
+
+public static int sequentialSearch (int[] array, int value) {
+    for (int i = 0; i < array.length; i ++) {
+        if (array[i] == value) 
+            return i;
+    }
+    return -1;
+}
+
+// Passing arrays to methods
+
+public static void update(int[] array){
+    array[0] += 1;
+}
+
+update(numbers);
+
+
+
+
