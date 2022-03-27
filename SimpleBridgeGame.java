@@ -1,5 +1,5 @@
 /* Simple Bridge Game
-Write a program to mimick a simple bridge game. 
+Write a program to mimic a simple bridge game. 
 Each of the four players plays a card. The trick is won by the highest trump, 
 or if there were none played, the highest card of the led suit.
 
