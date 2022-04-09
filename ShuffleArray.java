@@ -29,7 +29,8 @@ public class ShuffleArray {
         System.out.print("The shuffled array: ");
         printArray(array);
     }
-
+    
+    // swap the element at index i and the element at index j in the array
     public static void swap(int i, int j, int[] array) {
         int temp = array[i];
         array[i] = array[j];
@@ -39,7 +40,8 @@ public class ShuffleArray {
     public static int randRange(int min, int max){
         return (int) ( Math.random() * (max - min) ) + min;
     }
-
+    
+    // randomly shuffle an array
     public static void shuffle(int[] array){
         for (int i = 0; i < array.length; i ++){
             int j = randRange(i, array.length);
