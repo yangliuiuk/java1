@@ -2,7 +2,7 @@
 Write a program that prompts the user to enter an array of 10 integers, 
 and then displays the moving average of this number series. 
 Below is the formula to calculate moving average:
-MA(i) = Sum(number_0 + number_1 + ... + number_i) / (i - 1)
+MA(i) = Sum(number[0] + number[1] + ... + number[i-1]) / (i + 1)
 Below is a sample run:
 
 Enter 10 integers: 
