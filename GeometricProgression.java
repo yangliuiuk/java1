@@ -13,7 +13,7 @@
 public class GeometricProgression{
     public static void main(String[] args){
         for (int i = 0; i < 10; i ++)
-            System.out.print((int)geometricProgression(i, 2, 2) + " ");
+            System.out.print((int)geometricProgression(i, 1, 2) + " ");
     }
 
     /**
