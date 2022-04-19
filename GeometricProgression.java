@@ -3,12 +3,12 @@
  * initial value 1 and common ratio 2. The n-th term of this geometric progression
  * is given by:
  * 
- * a[0] = 1 (n = 0)
+ * a[n] = 1 (n = 0)
  * a[n] = 2 * a[n-1] (n >= 1)
  * 
  * Below is a sample run:
  * 
- * 2 4 8 16 32 64 128 256 512 1024
+ * 1 2 4 8 16 32 64 128 256 512
 */
 public class GeometricProgression{
     public static void main(String[] args){
