@@ -9,15 +9,15 @@ import java.util.Scanner;
 public class BinaryToDecimal {
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
-        System.out.print("Enter a binary string: ");
+        System.out.print("Enter a binary number: ");
         String binaryString = input.nextLine();
-        int decimalValue = 0;
+        int decimalNumber = 0;
         int base = 1;
         for (int i = binaryString.length() - 1; i >= 0; i--){
             if (binaryString.charAt(i) == '1')
-                decimalValue += base;
+                decimalNumber += base;
             base *= 2;
         }
-        System.out.printf("The decimal number is: %d\n", decimalValue);
+        System.out.printf("The decimal number is: %d\n", decimalNumber);
     }
 }
