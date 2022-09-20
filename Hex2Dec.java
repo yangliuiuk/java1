@@ -12,11 +12,11 @@ public class Test {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter a hex number: ");
-        String hexString = input.nextLine();
+        String hexNumber = input.nextLine();
         int decimalNumber = 0;
         int base = 1;
-        for (int i = hexString.length()-1; i >=0; i--){
-            char hexDigit = hexString.charAt(i);
+        for (int i = hexNumber.length()-1; i >=0; i--){
+            char hexDigit = hexNumber.charAt(i);
             int hexDigitValue = 0;
             if (hexDigit >= '0' && hexDigit <= '9')
                 hexDigitValue = (int)(hexDigit - '0');
