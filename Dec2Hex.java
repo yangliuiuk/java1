@@ -9,7 +9,7 @@ public class Dec2Hex {
         do 
         {
             int hexDigitNumber = decimalNumber % 16;
-            char hexDigitChar = '';
+            char hexDigitChar = ' ';
             if (hexDigitNumber >= 0 && hexDigitNumber <= 9)
                 hexDigitChar = (char)(hexDigitNumber + '0');
             else
