@@ -1,6 +1,6 @@
 /*
 Write a program that prompts the user to enter a decimal number,
-then convert it into a hex number and print it out.
+then convert it into a hexadecimal number and print it out.
 */
 
 import java.util.Scanner;
