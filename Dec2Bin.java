@@ -1,6 +1,6 @@
 /*
 Write a program that prompts the user to enter a decimal number, 
-then converts it to a binary number and displays it. 
+then converts it to a binary number and prints it out. 
 Below is a sample run:
 Enter a decimal number: 5
 The binary number is: 101
