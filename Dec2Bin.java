@@ -1,5 +1,5 @@
 /*
-Write a program that reads a decimal number from user, 
+Write a program that prompts the user to enter a decimal number, 
 then converts it to a binary number and displays it. 
 Below is a sample run:
 Enter a decimal number: 5
@@ -11,11 +11,14 @@ public class Dec2Bin {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter a decimal number: ");
         int decimalNumber = input.nextInt();
-        String binaryString = "";
+        String binaryNumber = "";
         do {
-            binaryString = String.valueOf(decimalNumber % 2) + binaryString;
+            int binaryDigitValue = decimalNumber % 2;
+            char binaryDigit = (char)(binaryDigitValue +'0');
+            // String binaryDigit = String.valueOf(binaryDigitValue);
+            binaryNumber = binaryDigit + binaryNumber;
             decimalNumber /= 2;
         } while(decimalNumber > 0);
-        System.out.printf("The binary number is: %s\n", binaryString);
+        System.out.printf("The binary number is: %s\n", binaryNumber);
     }
 }
