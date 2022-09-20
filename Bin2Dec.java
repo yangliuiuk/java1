@@ -7,7 +7,7 @@ The decimal number is: 5
 */
 
 import java.util.Scanner;
-public class BinaryToDecimal {
+public class Bin2Dec {
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         System.out.print("Enter a binary number: ");
