@@ -6,7 +6,7 @@ Enter a decimal number: 5
 The binary number is: 101
 */
 import java.util.Scanner;
-public class Test {
+public class Dec2Bin {
     public static void main(String[] args){
         Scanner input = new Scanner(System.in);
         System.out.print("Enter a decimal number: ");
