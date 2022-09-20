@@ -10,19 +10,19 @@ public class Dec2Hex {
         Scanner input = new Scanner(System.in);
         System.out.print("Enter a decimal number: ");
         int decimalNumber = input.nextInt();
-        String hexString = "";
+        String hexNumber = "";
         do 
         {
-            int hexDigitNumber = decimalNumber % 16;
-            char hexDigitChar = ' ';
-            if (hexDigitNumber >= 0 && hexDigitNumber <= 9)
-                hexDigitChar = (char)(hexDigitNumber + '0');
+            int hexDigitValue = decimalNumber % 16;
+            char hexDigit = ' ';
+            if (hexDigitValue >= 0 && hexDigitValue <= 9)
+                hexDigit = (char)(hexDigitValue + '0');
             else
-                hexDigitChar = (char)(hexDigitNumber - 10 + 'A');
-            hexString = hexDigitChar + hexString;
+                hexDigit = (char)(hexDigitValue - 10 + 'A');
+            hexNumber = hexDigit + hexNumber;
             decimalNumber /= 16;
         } while(decimalNumber > 0) ;
         
-        System.out.println("The hex number is " + hexString);
+        System.out.printf("The hex number is %s\n", hexNumber);
     }
 }
