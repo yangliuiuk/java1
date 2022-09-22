@@ -1,5 +1,6 @@
 /*
-Use nested loops to display a multiplication table like the following:
+Use nested loops to display a 9x9 multiplication table.
+Below is a sample run:
 
          9 x 9 multiplication table
 
