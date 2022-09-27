@@ -3,6 +3,9 @@ Checking Palindromes
 A string is a palindrome if it reads the same forward and backward. The words "mom", "dad", and "noon,"
 for instance, are all palindromes. 
 Write a program that prompts the user to enter a string and reports whether the string is a palindrome. 
+Below is a sample run:
+Enter a string: mom
+"mom" is a palindrome.
 */
 
 import java.util.Scanner;
