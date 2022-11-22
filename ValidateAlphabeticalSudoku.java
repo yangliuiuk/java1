@@ -24,66 +24,94 @@ Valid solution
 import java.util.Scanner;
 
 public class ValidateAlphabeticalSudoku {
-
     public static void main(String[] args) {
-        // Read a Sudoku solution
-        char[][] grid = readSolution();
-        // displaySolution(grid);
-        System.out.println(isValidSolution(grid) ? "Valid solution" : "Invalid solution");
+        System.out.println("Enter a Sudoku solution: ");
+        char[][] board = readBoard(); 
+        //printBoard(board);
+        if (isValidBoard(board)) {
+            System.out.println("Valid solution");
+        }
+        else {
+            System.out.println("Invalid solution");
+        }
+
     }
 
-    /** Read a Sudoku solution from the console */
-    public static char[][] readSolution() {
-        Scanner input = new Scanner(System.in);
-        System.out.println("Enter a Sudoku puzzle solution:");
-        char[][] grid = new char[9][9];
-        for (int i = 0; i < 9; i ++) 
-            for (int j = 0; j < 9; j ++){
-                grid[i][j] = input.next().charAt(0);
+    /** Read a board from keyboard
+     */
+
+    public static char[][] readBoard() {
+        char[][] board = new char[9][9];
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                board[i][j] = scanner.next().charAt(0);
             }
-        return grid;
-
+        }
+        return board;
     }
 
-    /** Display a Sudoku solution */
-    public static void displaySolution(char[][] grid) {
-        for (int i = 0; i < 9; i ++) {
-            for (int j = 0; j < 9; j ++){
-                System.out.print(grid[i][j] + " ");
+    /** Print a board */
+
+    public static void printBoard(char[][] board) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                System.out.print(board[i][j] + " ");
             }
             System.out.println();
         }
     }
 
-    /** Check whether a solution is valid */
-    public static boolean isValidSolution(char[][] grid ) {
-        for (int i = 0; i < 9; i ++) 
-            for (int j = 0; j < 9; j ++)
-                if (grid[i][j] < 'A' || grid[i][j] > 'I' || !isValidGrid(i, j, grid)){
+    /** Check whether board[row][col] is valid */
+    /** 
+     * @param row row number
+     * @param col column number
+     * @param board board
+     * @return wether board[row][col] is valid
+    */
+
+    public static boolean isValidGrid(int row, int col, char[][] board) {
+        /** check whether board[row][col] is from 'A' to 'I' */
+        if (board[row][col] > 'I' || board[row][col] < 'A') {
+            return false;
+        }
+        /** check whether board[row][col] is unique in row (row number) */
+        for (int j = 0; j < 9; j++) {
+            if (board[row][j] == board[row][col] && j != col) {
+                return false;
+            }
+        }
+        /** check whether board[row][col] is unique in column (col number) */
+        for (int i = 0; i < 9; i++) {
+            if (board[i][col] == board[row][col] && i != row) {
+                return false;
+            }
+        }
+
+        /** check whether board[row][col] is unique in the 3x3 box */
+        int boxStartRow = (row / 3) * 3;
+        int boxStartCol = (col / 3) * 3;
+        for (int i = boxStartRow; i < boxStartRow + 3; i++) {
+            for (int j = boxStartCol; j < boxStartCol + 3; j++) {
+                if (board[i][j] == board[row][col] && !(i == row && j == col)) {
                     return false;
                 }
+            }
+        }
+
         return true;
     }
 
-    /** Check whether grid[i][j] is valid in the grid */
-    public static boolean isValidGrid(int i, int j, char[][] grid){
-        // Check whether grid[i][j] is unique in the i'th row
-        for (int c = 0; c < 9; c ++)
-            if (grid[i][c] == grid[i][j] && c != j )
-                return false;
-        // Check whether grid[i][j] is unique in the j'th column
-        for (int r = 0; r < 9; r ++)
-            if (grid[r][j] == grid[i][j] && r != i )
-                return false;
-
-        // Check whether grid[i][j] is unique in the 3X3 box
-        int box_r_start = (i / 3) * 3;
-        int box_c_start = (j / 3) * 3;
-        for (int r = box_r_start; r < box_r_start + 3; r ++)
-            for (int c = box_c_start; c < box_c_start + 3; c ++)
-                if (grid[r][c] == grid[i][j] && !(r == i && c == j))
+    /** Check whether board is valid */
+    public static boolean isValidBoard(char[][] board) {
+        for (int i = 0; i < 9; i++) {
+            for (int j = 0; j < 9; j++) {
+                if (!isValidGrid(i, j, board)) {
                     return false;
-
+                }
+            }
+        }
         return true;
     }
+
 }
