@@ -1,119 +1,129 @@
-import java.util.Scanner;
-import java.io.*;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.Scanner;
 import java.util.Collections;
+import java.io.File;
 
 public class WordPuzzle {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
+        final String FILE_PATH = "wordlist.10000.txt";
+        final int NUM_OF_PUZZLES = 10;
 
-        System.out.println("Welcome to WordPuzzleX!");
+        System.out.println("Welcome to WordPuzzle!");
+        System.out.print("Enter game level (1, 2, 3 for easy, medium, and hard): ");
+        Scanner input = new Scanner(System.in);
+        int numOfMasks = input.nextInt();
+        input.nextLine(); // clean the string buffer
 
-        Scanner userInput = new Scanner(System.in);
+        ArrayList<String> dictionary = loadDictionary(FILE_PATH);
+        Collections.shuffle(dictionary); // shuffle the dictionary
+        
+        System.out.println("Type to complete words:");
 
-        System.out.print("Enter game level (1, 2, 3) for easy, medium, and hard): ");
-        int numMasks = userInput.nextInt();
-        userInput.nextLine();
+        long startTime = System.currentTimeMillis(); 
 
-        int MAX_NUM_PUZZLES = 10;
-        String WORDS_FILE = "wordlist.10000.txt";
-
-        ArrayList<String> words = loadWords(WORDS_FILE);
-        Collections.shuffle(words);
-
-        System.out.println("Type to complete the following words (press enter to skip): ");
-
-        long startTime = System.currentTimeMillis();
-
-        int numPuzzles = 0;
-        int wordIndex = 0;
+        int currentNumOfPuzzles = 0;
         int score = 0;
-        while (numPuzzles < MAX_NUM_PUZZLES && wordIndex < words.size()) {
-
-            String word = words.get(wordIndex);
-            if (word.length() >= numMasks + 2) {
-                String wordWithMasks = addMask(word, numMasks);
-                if (hasUniqueSolution(wordWithMasks, words)) {
-                    //System.out.println(wordWithMasks + " " + word);
+        for (String word : dictionary) {
+            if (isMaskable(word, numOfMasks)) {
+                String wordWithMasks = maskWord(word, numOfMasks);
+                if (hasUniqueSolution(wordWithMasks, dictionary)) {
                     System.out.print(wordWithMasks + ": ");
-                    String guess = userInput.nextLine();
-                    if (guess.equals(word)) {
+                    String answer = input.nextLine();
+                    if (answer.equals(word)) {
                         System.out.println("Correct!");
                         score++;
                     }
-                    else{
+                    else {
                         System.out.println("Wrong, the correct answer is: " + word);
                     }
 
-                    numPuzzles++;
+                    currentNumOfPuzzles++;
+                    if (currentNumOfPuzzles >= NUM_OF_PUZZLES) {
+                        break;
+                    }
                 }
             }
-
-            wordIndex++;
         }
-        long endTime = System.currentTimeMillis();
+
+        long endTime = System.currentTimeMillis(); 
+
         long timeSpent = (endTime - startTime) / 1000;
 
-        System.out.printf("Your score is: %d/%d\n", score, MAX_NUM_PUZZLES);
-        System.out.printf("Total time spent: %d seconds\n", timeSpent);
+        System.out.printf("Your score is: %d/%d\n", score, NUM_OF_PUZZLES);
+        System.out.printf("Time spent: %d seconds\n", timeSpent);
+
+    }
+
+    /** 
+     * Load the words from the dictionary file into an ArrayList
+     * @param filePath the path of the dictionary file
+     * @return an ArrayList holding all the words from the dictionary
+     * */
+    
+    public static ArrayList<String> loadDictionary (String filePath) throws Exception {
+        ArrayList<String> dictionary = new ArrayList<String>();
+        Scanner input = new Scanner(new File(filePath));
+        while(input.hasNext()) {
+            String word = input.nextLine();
+            dictionary.add(word);
+        }
+        return dictionary;
+
+    }
+
+    /** 
+     * Check whether a word is applicable to be masked
+     * */
+
+    public static boolean isMaskable (String word, int numOfMasks) {
+        if (word.length() >= numOfMasks + 2) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     /**
-     * Read words from a dictionary file.
+     * Randomly mask a certain number of letters in a word
+     * The first and the last letter should not be masked
+     * @param word the word to be masked
+     * @param numOfMasks the number of letters to be masked
+     * @param maskSymbol the mask symbol
+     * @return the masked word, i.e., the puzzle
      * */
-    public static ArrayList<String> loadWords(String filePath) {
-        ArrayList<String> words = new ArrayList<String>();
-        try {
-            Scanner input = new Scanner(new File(filePath));
-            while (input.hasNext()) {
-                String word = input.next();
-                words.add(word);
-            }
-        }
-        catch (Exception e) {
-            System.out.println(e);
-        }
-        
-        return words;
-    }
 
-    /** Randomly add some masks onto a word */
-    public static String addMask(String word, int numMasks) {
-        ArrayList<Integer> positions = new ArrayList<Integer>();
+    public static String maskWord (String word, int numOfMasks) {
+        char maskSymbol = '_';
+        ArrayList<Integer> charPositions = new ArrayList<Integer>();
         for (int i = 1; i < word.length() - 1; i++) {
-            positions.add(i);
+            charPositions.add(i);
         }
-        Collections.shuffle(positions);
-        StringBuilder word2 = new StringBuilder(word);
-        for (int i = 0; i < numMasks; i++) {
-            word2.setCharAt(positions.get(i), '_');
+        Collections.shuffle(charPositions);
+        //System.out.println(charPositions);
+        StringBuilder wordWithMasks = new StringBuilder(word);
+        for (int i = 0; i < numOfMasks; i++) {
+            wordWithMasks.setCharAt(charPositions.get(i), maskSymbol);
         }
-        return word2.toString();
+        return wordWithMasks.toString();
     }
 
-    /** Check if a word is a solution/match to a word with masks */
-    public static boolean matches(String wordWithMasks, String word) {
-        if (wordWithMasks.length() != word.length()) {
-            return false;
-        }
-        for (int i = 0; i < wordWithMasks.length(); i++) {
-            if (wordWithMasks.charAt(i) != '_' && wordWithMasks.charAt(i) != word.charAt(i)) {
-                return false;
-            }
-        }
-        return true;
-    }
+    /** 
+     * Check if a word puzzle has unique solution in the dictionary
+     * @param wordWithMasks the word puzzle
+     * @param dictionary the word dictionary
+     * @return if a word puzzle has unique solution in the dictionary
+     * */
 
-    /** Check whether a puzzle has an unique solution in a dictionary*/
-    public static boolean hasUniqueSolution(String wordWithMasks, ArrayList<String> words) {
+    public static boolean hasUniqueSolution (String wordWithMasks, ArrayList<String> dictionary) {
         int numSolutions = 0;
-        for (String word : words) {
-            if (matches(wordWithMasks, word)) {
+        for (String word : dictionary) {
+            if (matches(word, wordWithMasks)) {
                 numSolutions++;
-            }
-            if (numSolutions > 1) {
-                return false;
+                if (numSolutions > 1) {
+                    return false;
+                }
             }
         }
         if (numSolutions == 1) {
@@ -123,4 +133,25 @@ public class WordPuzzle {
             return false;
         }
     }
+
+    /**
+     * Check if a word is a solution to a puzzle 
+     * @param word a word in the dictionary
+     * @param wordWithMasks a word puzzle
+     * @return whether they match
+     * */
+
+    public static boolean matches (String word, String wordWithMasks) {
+        if (word.length() != wordWithMasks.length()) {
+            return false;
+        }
+        for (int i = 0; i < word.length(); i++) {
+            if (wordWithMasks.charAt(i) != '_' && word.charAt(i) != wordWithMasks.charAt(i)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
+
