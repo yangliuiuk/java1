@@ -1,5 +1,10 @@
+/*
+Write a Java program that takes a year as input from the user and checks whether it is a
+leap year or not.
+    */
 
 import java.util.Scanner;
+
 public class LeapYearCheckerBasic {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -32,3 +37,4 @@ public class LeapYearCheckerBasic {
         scanner.close();
     }
 }
+
